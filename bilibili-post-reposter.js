@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BiliBili Post Reposter
 // @namespace    bilibili-post-reposter
-// @version      1.2.0
+// @version      1.2.1
 // @description  每12小时检查全部关注UP主近两个月的官方抽奖，自动空文字转发，保存进度和记录。
 // @match        https://t.bilibili.com/
 // @noframes
@@ -478,7 +478,7 @@
   // 面板使用页面坐标，随页面滚动；低层级让聊天侧边栏等浮层覆盖它。
   function mount() {
     const host = document.createElement('div');
-    host.style.cssText = 'position:absolute;right:180px;top:240px;z-index:1';
+    host.style.cssText = 'position:absolute;right:170px;top:240px;z-index:1';
     const root = host.attachShadow({ mode: 'closed' });
     root.innerHTML = `
       <style>
@@ -541,9 +541,6 @@
       export: exportLogs
     };
     for (const [id, action] of Object.entries(actions)) view[id].onclick = action;
-    for (const id of ['start', 'resume', 'manage', 'pause', 'export']) {
-      GM_registerMenuCommand(view[id].textContent, actions[id]);
-    }
     render();
   }
 
